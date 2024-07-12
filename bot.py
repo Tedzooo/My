@@ -8,7 +8,7 @@ from tqdm import tqdm
 # Define your API ID and API HASH from my.telegram.org
 API_ID = '15453419'
 API_HASH = '6c9c9e5a2e65daf192e7dd9dde026f45'
-BOT_TOKEN = '7161717671:AAEdv03kNLb6QSn8NCFVTgxASO0qgjl4AFs'
+BOT_TOKEN = '7161717671:AAEce94mPO28ecL8qKR8VvKVttMHz_HMrE4'
 
 # Initialize the Client
 app = Client("video_sample_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
