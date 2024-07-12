@@ -6,9 +6,9 @@ import os
 import mimetypes
 
 # Replace these values with your own
-api_id = ""
-api_hash = ""
-bot_token = ""
+api_id = "15453419"
+api_hash = "6c9c9e5a2e65daf192e7dd9dde026f45"
+bot_token = "7161717671:AAEce94mPO28ecL8qKR8VvKVttMHz_HMrE4"
 
 app = Client("screenshot_bot", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 
