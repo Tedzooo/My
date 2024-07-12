@@ -1,112 +1,125 @@
-import os
-import time
 from pyrogram import Client, filters
-import ffmpeg
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from tqdm import tqdm
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+import fitz
+import cv2
+import os
+import mimetypes
 
-# Define your API ID and API HASH from my.telegram.org
-API_ID = '15453419'
-API_HASH = '6c9c9e5a2e65daf192e7dd9dde026f45'
-BOT_TOKEN = '7161717671:AAEce94mPO28ecL8qKR8VvKVttMHz_HMrE4'
+# Replace these values with your own
+api_id = "15453419"
+api_hash = "6c9c9e5a2e65daf192e7dd9dde026f45"
+bot_token = "7161717671:AAEce94mPO28ecL8qKR8VvKVttMHz_HMrE4"
 
-# Initialize the Client
-app = Client("video_sample_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
+app = Client("screenshot_bot", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 
-
-def generate_sample(input_file, output_file, duration=30):
+# Function to take multiple screenshots of a document
+def screenshot_document(file_path, max_pages=10):
+    screenshots = []
     try:
-        (
-            ffmpeg
-            .input(input_file, t=duration)
-            .output(output_file)
-            .run(overwrite_output=True)
-        )
-        return True
+        doc = fitz.open(file_path)
+        for page_number in range(min(doc.page_count, max_pages)):
+            page = doc.load_page(page_number)
+            pix = page.get_pixmap()
+            output_path = f"{file_path}_page_{page_number}.png"
+            pix.save(output_path)
+            screenshots.append(output_path)
+        return screenshots
     except Exception as e:
-        print(f"Error generating sample: {e}")
-        return False
+        print(f"Failed to process document: {e}")
+        return []
 
-async def handle_video_message(client, message):
-    # Inform the user that the download has started
-    reply_message = await message.reply_text("Downloading file...")
-    input_file = await message.download()
-    for i in range(10):
-        await reply_message.edit_text(f"Downloading file... ({(i + 1) * 10}%)")
-        time.sleep(0.5)
-    await reply_message.edit_text("Generating sample video...")
-    output_file = "sample_" + os.path.basename(input_file)
-    if generate_sample(input_file, output_file):
-        for i in range(10):
-            await reply_message.edit_text(f"Generating sample video... ({(i + 1) * 10}%)")
-            time.sleep(0.5)
-        await reply_message.edit_text("Uploading sample video...")
-        await message.reply_video(video=output_file, caption="Here's your 30-second sample video!")
-        os.remove(input_file)
-        os.remove(output_file)
-        await reply_message.edit_text("Sample video generated and uploaded successfully!")
-    else:
-        await reply_message.edit_text("Failed to generate sample video.")
+# Function to take multiple screenshots of a video at regular intervals
+def screenshot_video(file_path, max_frames=10):
+    screenshots = []
+    try:
+        cap = cv2.VideoCapture(file_path)
+        if not cap.isOpened():
+            raise Exception("Could not open video file")
+        
+        total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+        interval = max(1, total_frames // max_frames)
+        
+        for frame_number in range(0, total_frames, interval):
+            cap.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
+            success, frame = cap.read()
+            if success:
+                output_path = f"{file_path}_frame_{frame_number}.png"
+                cv2.imwrite(output_path, frame)
+                screenshots.append(output_path)
+            if len(screenshots) >= max_frames:
+                break
+        
+        cap.release()
+        return screenshots
+    except Exception as e:
+        print(f"Failed to process video: {e}")
+        return []
 
-@app.on_message(filters.document | filters.video)
-async def media_handler(client, message):
-    if message.video or (message.document and message.document.mime_type in ["video/x-matroska", "video/mp4"]):
-        await handle_video_message(client, message)
-    else:
-        await message.reply_text("Please send a valid video file (MKV or MP4).")
-
-
-####################################################################################################
-
-
+# Handler for the /start command
 @app.on_message(filters.command("start"))
 async def start(client, message):
-    start_message = (
-        "👋 Hello welcome to the Video Sample Bot!\n\n"
-        "Send me a video file (MKV or MP4), and I'll generate a 30-second sample video for you."
-    )
-    
-    # Define inline keyboard with buttons
-    keyboard = InlineKeyboardMarkup(
+    buttons = [
         [
-            [
-                InlineKeyboardButton("📣 Join my channel 📣", url="https://t.me/NT_BOT_CHANNEL"),
-                InlineKeyboardButton("👥 Support group 👥", url="https://t.me/NT_BOTS_SUPPORT"),
-            ],
-            [
-                InlineKeyboardButton("👩‍💻 Developer 👩‍💻", url="https://t.me/LISA_FAN_LK"),
-                InlineKeyboardButton("⛔️ Cancel ⛔️", callback_data="cancel"),
-            ]
+            InlineKeyboardButton("📣 Join my channel 📣", url="https://t.me/NT_BOT_CHANNEL"),
+            InlineKeyboardButton("👥 Support group 👥", url="https://t.me/NT_BOTS_SUPPORT"),
+        ],
+        [
+            InlineKeyboardButton("👩‍💻 Developer 👩‍💻", url="https://t.me/LISA_FAN_LK"),
+            InlineKeyboardButton("⛔️ Cancel ⛔️", callback_data="cancel"),
         ]
-    )
+    ]
+    reply_markup = InlineKeyboardMarkup(buttons)
+    await message.reply_text("Hello! I am your screenshot bot. Send me a document or video file, and I will generate screenshots for you.", reply_markup=reply_markup)
 
-    await message.reply_text(start_message, reply_markup=keyboard)
+# Handler for the /help command
+@app.on_message(filters.command("help"))
+async def help(client, message):
+    await message.reply_text("Usage:\n\n"
+                             "1. Send a document (PDF, DOC, DOCX) to get screenshots of its pages.\n"
+                             "2. Send a video file (MP4, WEBM, MKV, AVI, MOV, WMV) to get screenshots from the video.\n"
+                             "3. I will process the file and upload the screenshots for you.")
 
+# Handler for file messages
+@app.on_message(filters.document | filters.video)
+async def file_handler(client, message):
+    file = message.document or message.video
+    reply_message = await message.reply_text("Downloading file...")
+    file_path = await app.download_media(file)
+    
+    if not file_path:
+        await message.reply_text("Failed to download the file.")
+        return
+    
+    mime_type, _ = mimetypes.guess_type(file_path)
+    print(f"File MIME type: {mime_type}")
+    
+    if mime_type in ["application/pdf", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"]:
+        await reply_message.edit_text("Processing document...")
+        screenshots = screenshot_document(file_path)
+    elif mime_type in ["video/mp4", "video/webm", "video/x-matroska", "video/avi", "video/quicktime", "video/x-msvideo", "video/x-ms-wmv"]:
+        await reply_message.edit_text("Processing video...")
+        screenshots = screenshot_video(file_path)
+    else:
+        await reply_message.edit_text(f"Unsupported file type: {mime_type}")
+        os.remove(file_path)
+        return
+
+    os.remove(file_path)
+
+    if screenshots:
+        await reply_message.edit_text("Uploading screenshots...")
+        for screenshot_path in screenshots:
+            await app.send_photo(chat_id=message.chat.id, photo=screenshot_path)
+            os.remove(screenshot_path)
+        await reply_message.delete()
+        await message.delete()
+    else:
+        await reply_message.edit_text("Failed to process the file.")
 
 @app.on_callback_query(filters.regex("cancel"))
 async def cancel(client, callback_query):
     await callback_query.message.delete()
 
-
-@app.on_message(filters.command("help"))
-async def help_command(client, message):
-    help_text = (
-        "Welcome to the Video Sample Bot Help!\n\n"
-        "Commands:\n"
-        "/start - Start the bot and get instructions.\n"
-        "/help - Get this help message.\n\n"
-        "Usage:\n"
-        "Send me a video file (MKV or MP4), and I'll generate a 30-second sample video for you.\n\n"
-        "Note:\n"
-        "This bot currently supports MKV and MP4 video formats for generating samples."
-    )
-    await message.reply_text(help_text)
-
-
-
-
-####################################################################################################
-
-
 # Run the bot
-app.run()
+if __name__ == "__main__":
+    app.run()
