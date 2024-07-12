@@ -4,3 +4,6 @@ ffmpeg-python
 tqdm
 flask
 gunicorn==20.1.0
+pymupdf
+opencv-python
+numpy<2
