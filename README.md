@@ -9,7 +9,8 @@
 # How To Deploy
 
 <b><details><summary>Tap To watch</summary>
-
+[![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?type=git&repository=github.com/VJBots/VJ-Filter-Bot&branch=Tech_VJ&name=VJ-Filter-Bot)
+</details>
 ### Heroku Video
 <a href="https://github.com/LISA-KOREA"><img alt="how to create" src="https://img.shields.io/badge/-YouTube-red?style=for-the-badge&logo=youtube&logoColor=white"/></a> 
 
