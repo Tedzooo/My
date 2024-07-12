@@ -1,5 +1,6 @@
 pyrofork
-pymupdf
-opencv-python
 tgcrypto
-numpy<2
+ffmpeg-python
+tqdm
+flask
+gunicorn==20.1.0
