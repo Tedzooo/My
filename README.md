@@ -7,7 +7,7 @@
 
 
 # How To Deploy
-
+https://heroku.com/deploy?template=https://github.com/Tedzo555/My
 <b><details><summary>Tap To watch</summary>
 [![Deploy to Koyeb](https://www.koyeb.com/static/images/deploy/button.svg)](https://app.koyeb.com/deploy?type=git&repository=github.com/Tedzo555/My&branch=master&name=tedzobotzzzzzz)
 </details>
