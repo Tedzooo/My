@@ -141,6 +141,7 @@ async def handle_message(client, message):
     # Send the prank message to the user
     if "BOOM" in prank_message:
         await message.reply_text("hyyy")
+        await asyncio.sleep(0.6)
         await message.delete()
     
 
