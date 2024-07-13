@@ -126,11 +126,11 @@ async def start_command(client, message):
     # Send a welcome message to the user
     await message.reply_text("Welcome to the Prank Bot! Get ready to be pranked! 😄")
     await msg.message.edit("○○○○○")
-        await msg.message.edit("●○○○○")
-        await msg.message.edit("●●○○○")
-        await msg.message.edit("●●●○○")
-        await msg.message.edit("●●●●○")
-        await msg.message.edit("●●●●●")
+    await msg.message.edit("●○○○○")
+    await msg.message.edit("●●○○○")
+    await msg.message.edit("●●●○○")
+    await msg.message.edit("●●●●○")
+    await msg.message.edit("●●●●●")
 
 # Define a function to handle incoming messages
 @app.on_message(filters.private)
