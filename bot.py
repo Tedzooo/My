@@ -140,7 +140,7 @@ async def handle_message(client, message):
     
     # Send the prank message to the user
     if "BOOM" in prank_message:
-        await message.reply_sticker(sticker="CAACAgIAAxkBAAECR5FiWgOUsaX2iRWuUtv8Y7AvIPoNuQAC-hAAAqHHKEg5ZXbrk1gHox4E"/)
+        await message.reply_text("hyyy")
         await message.answer("Mode Chenged To Sticker")
         await message.delete()
     
