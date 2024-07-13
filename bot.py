@@ -125,12 +125,12 @@ async def help_command(client, message):
 async def start_command(client, message):
     # Send a welcome message to the user
     await message.reply_text("Welcome to the Prank Bot! Get ready to be pranked! 😄")
-    await msg.message.edit("○○○○○")
-    await msg.message.edit("●○○○○")
-    await msg.message.edit("●●○○○")
-    await msg.message.edit("●●●○○")
-    await msg.message.edit("●●●●○")
-    await msg.message.edit("●●●●●")
+    await message.edit("○○○○○")
+    await message.edit("●○○○○")
+    await message.edit("●●○○○")
+    await message.edit("●●●○○")
+    await message.edit("●●●●○")
+    await message.edit("●●●●●")
 
 # Define a function to handle incoming messages
 @app.on_message(filters.private)
@@ -140,8 +140,8 @@ async def handle_message(client, message):
     
     # Send the prank message to the user
     if "BOOM" in prank_message:
-        await message.reply_text(prank_message)
-        await msg.answer("Mode Chenged To Sticker")
+        await message.reply_sticker(sticker="CAACAgIAAxkBAAECR5FiWgOUsaX2iRWuUtv8Y7AvIPoNuQAC-hAAAqHHKEg5ZXbrk1gHox4E)
+        await message.answer("Mode Chenged To Sticker")
         await message.delete()
     
 
