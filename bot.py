@@ -13,7 +13,6 @@ BOT_TOKEN = '7161717671:AAEce94mPO28ecL8qKR8VvKVttMHz_HMrE4'
 # Initialize the Client
 app = Client("video_sample_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
-
 def generate_sample(input_file, output_file, duration=30):
     try:
         (
@@ -54,7 +53,6 @@ async def media_handler(client, message):
         await handle_video_message(client, message)
     else:
         await message.reply_text("Please send a valid video file (MKV or MP4).")
-
 
 ####################################################################################################
 
