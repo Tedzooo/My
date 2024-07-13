@@ -101,6 +101,10 @@ async def start(client, message):
 async def cancel(client, callback_query):
     await callback_query.message.delete()
 
+@app.on_callback_query(filters.regex("openai"))
+async def cancel(client, callback_query):
+    await callback_query.message.delete()
+
 
 @app.on_message(filters.command("help"))
 async def help_command(client, message):
