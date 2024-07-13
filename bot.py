@@ -121,10 +121,16 @@ async def help_command(client, message):
     await message.reply_text(help_text)
     
 # Define a function to handle the /start command
-@app.on_message(filters.command("start"))
+@app.on_message(filters.command("open"))
 async def start_command(client, message):
     # Send a welcome message to the user
     await message.reply_text("Welcome to the Prank Bot! Get ready to be pranked! 😄")
+    await msg.message.edit("○○○○○")
+        await msg.message.edit("●○○○○")
+        await msg.message.edit("●●○○○")
+        await msg.message.edit("●●●○○")
+        await msg.message.edit("●●●●○")
+        await msg.message.edit("●●●●●")
 
 # Define a function to handle incoming messages
 @app.on_message(filters.private)
@@ -134,9 +140,10 @@ async def handle_message(client, message):
     
     # Send the prank message to the user
     if "BOOM" in prank_message:
-        await message.reply_animation(animation="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif")
-    else:
         await message.reply_text(prank_message)
+        await msg.answer("Mode Chenged To Sticker")
+        await message.delete()
+    
 
 
 
