@@ -140,5 +140,6 @@ async def handle_message(client, message):
 ####################################################################################################
 
 
-# Run the bot
+# Run the bot #
+app = Bot()
 app.run()
