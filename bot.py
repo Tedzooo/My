@@ -68,53 +68,7 @@ async def media_handler(client, message):
         await message.reply_text("Please send a valid video file (MKV or MP4).")
 
 ####################################################################################################
-
-
-@app.on_message(filters.command("start"))
-async def start(client, message):
-    start_message = (
-        "👋 Hello welcome to the Video Sample Bot!\n\n"
-        "Send me a video file (MKV or MP4), and I'll generate a 30-second sample video for you."
-    )
-    
-    # Define inline keyboard with buttons
-    keyboard = InlineKeyboardMarkup(
-        [
-            [
-                InlineKeyboardButton("📣 Join my channel 📣", url="https://t.me/tedzo01"),
-                InlineKeyboardButton("👥 Support group 👥", url="https://t.me/tedzo01"),
-            ],
-            [
-                InlineKeyboardButton("👩‍💻 Developer 👩‍💻", url="https://t.me/tedzo01"),
-                InlineKeyboardButton("⛔️ Cancel ⛔️", callback_data="cancel"),
-            ]
-        ]
-    )
-
-    await message.reply_text(start_message, reply_markup=keyboard)
-
-
-@app.on_callback_query(filters.regex("cancel"))
-async def cancel(client, callback_query):
-    await callback_query.message.delete()
-
-
-@app.on_message(filters.command("help"))
-async def help_command(client, message):
-    help_text = (
-        "Welcome to the Video Sample Bot Help!\n\n"
-        "Commands:\n"
-        "/start - Start the bot and get instructions.\n"
-        "/help - Get this help message.\n\n"
-        "Usage:\n"
-        "Send me a video file (MKV or MP4), and I'll generate a 30-second sample video for you.\n\n"
-        "Note:\n"
-        "This bot currently supports MKV and MP4 video formats for generating samples."
-    )
-    await message.reply_text(help_text)
-    
-
-
+  
 ####################################################################################################
 
 
