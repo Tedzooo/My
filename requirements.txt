@@ -9,3 +9,4 @@ opencv-python
 numpy<2
 pyrogram
 openai==0.25.0
+python-dotenv
