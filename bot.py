@@ -26,9 +26,15 @@ prank_messages = [
     "Important announcement: You've been officially pranked! 📢",
     "Prank level: Expert! You're now a certified prankster! 🏆",
 ]
-# Initialize the Client
-app = Client("video_sample_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
-
+# Initialize the Clien
+app = Client(
+    "mybottttt",
+    bot_token=Config.BOT_TOKEN,
+    api_id=Config.API_ID,
+    api_hash=Config.API_HASH,
+    workers=100,
+    plugins=dict(root="plugins")
+)
 def generate_sample(input_file, output_file, duration=30):
     try:
         (
