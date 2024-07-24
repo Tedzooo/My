@@ -101,10 +101,6 @@ async def start(client, message):
 async def cancel(client, callback_query):
     await callback_query.message.delete()
 
-@app.on_callback_query(filters.regex("openai"))
-async def cancel(client, callback_query):
-    await callback_query.message.delete()
-
 
 @app.on_message(filters.command("help"))
 async def help_command(client, message):
@@ -121,16 +117,10 @@ async def help_command(client, message):
     await message.reply_text(help_text)
     
 # Define a function to handle the /start command
-@app.on_message(filters.command("open"))
+@app.on_message(filters.command("start"))
 async def start_command(client, message):
     # Send a welcome message to the user
     await message.reply_text("Welcome to the Prank Bot! Get ready to be pranked! 😄")
-    await reply_message.edit_text("○○○○○")
-    await reply_message.edit_text("●○○○○")
-    await reply_message.edit_text("●●○○○")
-    await reply_message.edit_text("●●●○○")
-    await reply_message.edit_text("●●●●○")
-    await reply_message.edit_text("●●●●●")
 
 # Define a function to handle incoming messages
 @app.on_message(filters.private)
@@ -140,10 +130,9 @@ async def handle_message(client, message):
     
     # Send the prank message to the user
     if "BOOM" in prank_message:
-        await message.reply_text("hyyy")
-        await asyncio.sleep(0.6)
-        await message.delete()
-    
+        await message.reply_animation(animation="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif")
+    else:
+        await message.reply_text(prank_message)
 
 
 
