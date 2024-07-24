@@ -27,6 +27,9 @@ prank_messages = [
     "Prank level: Expert! You're now a certified prankster! 🏆",
 ]
 # Initialize the Clien
+
+load_dotenv()
+
 app = Client(
     "mybottttt",
     bot_token=BOT_TOKEN,
