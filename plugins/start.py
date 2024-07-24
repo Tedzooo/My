@@ -3,11 +3,7 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 
 
 
-@Client.on_message(
-    filters.command("start")
-    & filters.private
-    & ~ filters.edited
-)
+@Client.on_message(filters.command("start") & filters.incoming)
 async def start_(client: Client, message: Message):
     await message.reply_sticker("CAACAgUAAx0CQ8QTWQACCD9gpSGtPso-JueMmC6tCptx2H6VjAACngEAAmpqaFeIQbV46r_aFh8E")
     await message.reply_text(
