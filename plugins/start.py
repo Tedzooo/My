@@ -43,11 +43,7 @@ Music Assistant - @camilaowner
         )
     )
 
-@Client.on_message(
-    filters.command("start")
-    & filters.group
-    & ~ filters.edited
-)
+@Client.on_message(filters.command("start") & filters.incoming)
 async def start(client: Client, message: Message):
     await message.reply_text(
         "💁🏻‍♂️ Do you want to search for a YouTube video?",
@@ -70,11 +66,7 @@ async def start(client: Client, message: Message):
         )
     )
 
-@Client.on_message(
-    filters.command("help")
-    & filters.private
-    & ~ filters.edited
-)
+@Client.on_message(filters.command("help") & filters.incoming)
 async def help(client: Client, message: Message):
     await message.reply_text(
         f"""<b>Hi {message.from_user.first_name}!
