@@ -29,9 +29,9 @@ prank_messages = [
 # Initialize the Clien
 app = Client(
     "mybottttt",
-    bot_token=Config.BOT_TOKEN,
-    api_id=Config.API_ID,
-    api_hash=Config.API_HASH,
+    bot_token=BOT_TOKEN,
+    api_id=API_ID,
+    api_hash=API_HASH,
     workers=100,
     plugins=dict(root="plugins")
 )
