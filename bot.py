@@ -13,20 +13,7 @@ API_ID = '15453419'
 API_HASH = '6c9c9e5a2e65daf192e7dd9dde026f45'
 BOT_TOKEN = '7161717671:AAEce94mPO28ecL8qKR8VvKVttMHz_HMrE4'
 # Define a list of prank messages
-prank_messages = [
-    "Oops! You've been pranked! 😜",
-    "Surprise! It's just a prank! 🎉",
-    "Gotcha! Prank time! 🃏",
-    "You're the lucky winner of a prank! 🥳",
-    "This message will self-destruct in 3... 2... 1... BOOM! Just kidding 😄",
-    "Congratulations! You've won a free imaginary vacation to Mars! 🚀",
-    "Warning: This message contains extreme levels of prankiness! Proceed with caution. 😄",
-    "You've unlocked the secret prank level! Prepare for the unexpected! 🎈",
-    "You just missed the prank train! 🚂 Better luck next time! 😄",
-    "Unexpected error: Prank.exe has stopped working. Just kidding! 😂",
-    "Important announcement: You've been officially pranked! 📢",
-    "Prank level: Expert! You're now a certified prankster! 🏆",
-]
+
 # Initialize the Clien
 
 load_dotenv()
@@ -94,11 +81,11 @@ async def start(client, message):
     keyboard = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton("📣 Join my channel 📣", url="https://t.me/PBX1_BOTS"),
-                InlineKeyboardButton("👥 Support group 👥", url="https://t.me/PBX1_SUPPORT_CHAT"),
+                InlineKeyboardButton("📣 Join my channel 📣", url="https://t.me/tedzo01"),
+                InlineKeyboardButton("👥 Support group 👥", url="https://t.me/tedzo01"),
             ],
             [
-                InlineKeyboardButton("👩‍💻 Developer 👩‍💻", url="https://t.me/PBX1_OP"),
+                InlineKeyboardButton("👩‍💻 Developer 👩‍💻", url="https://t.me/tedzo01"),
                 InlineKeyboardButton("⛔️ Cancel ⛔️", callback_data="cancel"),
             ]
         ]
@@ -126,25 +113,6 @@ async def help_command(client, message):
     )
     await message.reply_text(help_text)
     
-# Define a function to handle the /start command
-@app.on_message(filters.command("myr"))
-async def start_command(client, message):
-    # Send a welcome message to the user
-    await message.reply_text("Welcome to the Prank Bot! Get ready to be pranked! 😄")
-
-# Define a function to handle incoming messages
-@app.on_message(filters.private)
-async def handle_message(client, message):
-    # Choose a random prank message
-    prank_message = random.choice(prank_messages)
-    
-    # Send the prank message to the user
-    if "BOOM" in prank_message:
-        await message.reply_animation(animation="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif")
-    else:
-        await message.reply_text("hyy)
-
-
 
 
 ####################################################################################################
