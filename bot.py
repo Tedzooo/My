@@ -4,6 +4,7 @@ from pyrogram import Client, filters
 import random
 import asyncio
 import ffmpeg
+from dotenv import load_dotenv
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from tqdm import tqdm
 
