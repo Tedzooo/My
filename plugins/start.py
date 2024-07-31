@@ -5,7 +5,7 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 
 
 
-@Client.on_message(filters.command("startt") & filters.incoming)
+@Client.on_message(filters.new_chat_members)
 async def start_(client: Client, message: Message):
        await message.reply_sticker("CAACAgUAAx0CQ8QTWQACCD9gpSGtPso-JueMmC6tCptx2H6VjAACngEAAmpqaFeIQbV46r_aFh8E")
        await message.reply_text(
