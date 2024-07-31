@@ -43,8 +43,8 @@ async def start_(client: Client, message: Message):
 
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client: Client, message: Message):
-       emoji = random.choice(EMOJIS)
-    await client.send_reaction(chat_id=message.chat.id, message_id=message.id, emoji=emoji)
+  emojii = random.choice("🤝","🤨")
+    await client.send_reaction(chat_id=message.chat.id, message_id=message.id, emoji=emojii)
     await message.reply_text(
         "💁🏻‍♂️ Do you want to search for a YouTube video?",
         reply_markup=InlineKeyboardMarkup(
