@@ -2,7 +2,8 @@ import random
 import asyncio
 from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
-pyrogram.errors import FloodWait
+from pyrogram import errors
+from pyrogram.errors import FloodWait
 EMOJIS =("🤝","🤨")
 
 @Client.on_message(filters.new_chat_members)
