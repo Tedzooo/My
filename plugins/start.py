@@ -2,8 +2,7 @@ import random
 import asyncio
 from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
-pyrogram.errors import FloodWaitfrom 
-pyrogram.errors import RPCError
+pyrogram.errors import FloodWait
 EMOJIS =("🤝","🤨")
 
 @Client.on_message(filters.new_chat_members)
@@ -47,7 +46,7 @@ async def start(client: Client, message: Message):
   emojii = random.choice("🤝","🤨")
     await client.send_reaction(chat_id=message.chat.id, message_id=message.id, emoji=emojii)
     await message.reply_text(
-        "💁🏻‍♂️ Do you want to search for a YouTube video?",
+        "💁🏻‍♂️ assalamualaikum ",
         reply_markup=InlineKeyboardMarkup(
             [
                 [
