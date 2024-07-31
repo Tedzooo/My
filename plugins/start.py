@@ -3,11 +3,10 @@ import asyncio
 from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 
-
+EMOJIS =("🤝","🤨")
 
 @Client.on_message(filters.new_chat_members)
 async def start_(client: Client, message: Message):
-       await message.reply_sticker("CAACAgUAAx0CQ8QTWQACCD9gpSGtPso-JueMmC6tCptx2H6VjAACngEAAmpqaFeIQbV46r_aFh8E")
        await message.reply_text(
         f"""<b>Hi {message.from_user.first_name}!
 \nWelcome To {message.chat.title}
@@ -44,6 +43,8 @@ async def start_(client: Client, message: Message):
 
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client: Client, message: Message):
+       emoji = random.choice(EMOJIS)
+    await client.send_reaction(chat_id=message.chat.id, message_id=message.id, emoji=emoji)
     await message.reply_text(
         "💁🏻‍♂️ Do you want to search for a YouTube video?",
         reply_markup=InlineKeyboardMarkup(
