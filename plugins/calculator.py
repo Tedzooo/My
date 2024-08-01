@@ -1,28 +1,10 @@
-import os
-from dotenv import load_dotenv
-from pyrogram import Client, filters
+# code from @fayasnoushad
+from pyrogram import Client as Bot
+from pyrogram import filters
 from pyrogram.types import *
 
-# Load environment variables
-load_dotenv()
 
-# Initialize the bot
-Bot = Client(
-    "Calculator-Bot",
-    bot_token=os.environ.get("BOT_TOKEN"),
-    api_id=int(os.environ.get("API_ID")),
-    api_hash=os.environ.get("API_HASH")
-)
-
-# Constants
-START_TEXT = """Hello {},
-I am a simple calculator telegram bot. \
-Send me /calculator for inline button keyboard or send as text. \
-You can also use me in inline.
-
-Made by @FayasNoushad"""
-
-CALCULATE_TEXT = "Made by @FayasNoushad"
+CALCULATE_TEXT = "Made by @Tedzo"
 
 START_BUTTONS = InlineKeyboardMarkup(
     [[InlineKeyboardButton('⚙ Feedback ⚙', url='https://telegram.me/FayasNoushad')]]
@@ -66,15 +48,6 @@ CALCULATE_BUTTONS = InlineKeyboardMarkup([
     ]
 ])
 
-# Handlers
-@Bot.on_message(filters.command("start"))
-async def start(_, message):
-    await message.reply_text(
-        text=START_TEXT.format(message.from_user.mention),
-        disable_web_page_preview=True,
-        reply_markup=START_BUTTONS,
-        quote=True
-    )
 
 @Bot.on_message(filters.private & filters.command(["calc", "calculate", "calculator"]))
 async def calculate(_, message):
@@ -165,6 +138,3 @@ async def inline(bot, query):
     except Exception as error:
         print(f"Inline query error: {error}")
     await query.answer(results)
-
-# Run the bot
-Bot.run()
