@@ -4,10 +4,10 @@ from pyrogram import filters
 from pyrogram.types import *
 
 
-CALCULATE_TEXT = "Made by @Tedzo"
+CALCULATE_TEXT = "Made by @FayasNoushad"
 
 START_BUTTONS = InlineKeyboardMarkup(
-    [[InlineKeyboardButton('⚙ Feedback ⚙', url='https://telegram.me/FayasNoushad')]]
+    [[InlineKeyboardButton('⚙ Feedback ⚙', url='https://telegram.me/tedzo01')]]
 )
 
 CALCULATE_BUTTONS = InlineKeyboardMarkup([
@@ -49,17 +49,10 @@ CALCULATE_BUTTONS = InlineKeyboardMarkup([
 ])
 
 
-@Bot.on_message(filters.private & filters.command(["calc", "calculate", "calculator"]))
-async def calculate(_, message):
-    await message.reply_text(
-        text=CALCULATE_TEXT,
-        reply_markup=CALCULATE_BUTTONS,
-        disable_web_page_preview=True,
-        quote=True
-    )
 
-@Bot.on_message(filters.private & filters.text)
-async def evaluate(_, message):
+
+@Bot.on_message(filters.private & filters.command(["calc", "calculate", "calculator"]))
+async def calculat(_, message):
     data = message.text.replace("×", "*").replace("÷", "/")
     try:
         result = str(eval(data))
@@ -138,3 +131,4 @@ async def inline(bot, query):
     except Exception as error:
         print(f"Inline query error: {error}")
     await query.answer(results)
+p
