@@ -2,7 +2,7 @@ import random
 import asyncio
 from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
-
+from pyrogram.errors import ChatAdminRequired, FloodWait
 
 @Client.on_message(filters.new_chat_members)
 async def start_(client: Client, message: Message):
