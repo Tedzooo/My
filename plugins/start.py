@@ -4,7 +4,27 @@ from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram.errors import MessageIdInvalid, ChatAdminRequired, EmoticonInvalid, ReactionInvalid, FloodWait
 
-
+EMOJIS = [
+        "👍", "👎", "❤", "🔥", 
+        "🥰", "👏", "😁", "🤔",
+        "🤯", "😱", "🤬", "😢",
+        "🎉", "🤩", "🤮", "💩",
+        "🙏", "👌", "🕊", "🤡",
+        "🥱", "🥴", "😍", "🐳",
+        "❤‍🔥", "🌚", "🌭", "💯",
+        "🤣", "⚡", "🍌", "🏆",
+        "💔", "🤨", "😐", "🍓",
+        "🍾", "💋", "🖕", "😈",
+        "😴", "😭", "🤓", "👻",
+        "👨‍💻", "👀", "🎃", "🙈",
+        "😇", "😨", "🤝", "✍",
+        "🤗", "🫡", "🎅", "🎄",
+        "☃", "💅", "🤪", "🗿",
+        "🆒", "💘", "🙉", "🦄",
+        "😘", "💊", "🙊", "😎",
+        "👾", "🤷‍♂", "🤷", "🤷‍♀",
+        "😡"
+]
 
 
 @Client.on_message(filters.new_chat_members)
@@ -45,7 +65,7 @@ async def start_(client: Client, message: Message):
 
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client: Client, message: Message):
-await app.send_reaction(chat_id, message_id=message_id, emoji=photo=random.choice()
+await client.send_reaction(chat_id, message_id=message_id, emoji=random.choice[EMOJIS])
    await message.reply_text(
         "💁🏻‍♂️ assalamualaikum ",reply_markup=InlineKeyboardMarkup(
                [
