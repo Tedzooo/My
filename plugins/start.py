@@ -65,7 +65,7 @@ async def start_(client: Client, message: Message):
 
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client: Client, message: Message):
-await client.send_reaction(chat_id, message_id=message_id, emoji=random.choice[EMOJIS])
+await client.send_reaction(chat_id, message_id=message_id, emoji=random.choice(EMOJIS))
    await message.reply_text(
         "💁🏻‍♂️ assalamualaikum ",reply_markup=InlineKeyboardMarkup(
                [
