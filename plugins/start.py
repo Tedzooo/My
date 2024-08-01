@@ -2,7 +2,10 @@ import random
 import asyncio
 from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
-from pyrogram.errors import ChatAdminRequired, FloodWait
+from pyrogram.errors import MessageIdInvalid, ChatAdminRequired, EmoticonInvalid, ReactionInvalid, FloodWait
+
+
+
 
 @Client.on_message(filters.new_chat_members)
 async def start_(client: Client, message: Message):
@@ -42,9 +45,8 @@ async def start_(client: Client, message: Message):
 
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client: Client, message: Message):
-    await client.send_reaction(message.chat.id, message.id, "⚡")
-    await asyncio.sleep(2) 
-    await message.reply_text(
+await app.send_reaction(chat_id, message_id=message_id, emoji=photo=random.choice()
+   await message.reply_text(
         "💁🏻‍♂️ assalamualaikum ",reply_markup=InlineKeyboardMarkup(
                [
                 [
