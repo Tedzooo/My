@@ -4,7 +4,7 @@ from pyrogram import filters
 from pyrogram.types import *
 
 
-CALCULATE_TEXT = "Made by @FayasNoushad"
+CALCULATE_TEXT = "Made by @tedzo01"
 
 START_BUTTONS = InlineKeyboardMarkup(
     [[InlineKeyboardButton('⚙ Feedback ⚙', url='https://telegram.me/tedzo01')]]
