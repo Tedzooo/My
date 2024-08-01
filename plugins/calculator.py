@@ -131,4 +131,4 @@ async def inline(bot, query):
     except Exception as error:
         print(f"Inline query error: {error}")
     await query.answer(results)
-p
+
