@@ -42,12 +42,11 @@ async def start_(client: Client, message: Message):
 
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client: Client, message: Message):
-  emojii = random.choice("🤝","🤨")
-    await message.send_reaction(chat_id=message.chat.id, message_id=message.id, emoji=emojii)
+    await client.send_reaction(message.chat.id, message.id, "⚡")
+    await asyncio.sleep(2) 
     await message.reply_text(
-        "💁🏻‍♂️ assalamualaikum ",
-        reply_markup=InlineKeyboardMarkup(
-            [
+        "💁🏻‍♂️ assalamualaikum ",reply_markup=InlineKeyboardMarkup(
+               [
                 [
                     InlineKeyboardButton(
                         "Support Group  ", url="https://t.me/tedzo01"
