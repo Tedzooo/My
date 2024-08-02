@@ -79,7 +79,7 @@ async def start(client: Client, message: Message):
                         "✅ Yes", switch_inline_query_current_chat=""
                     ),
                     InlineKeyboardButton(
-                        "No ❌", callback_data="close1"
+                        "No ❌", callback_data="close"
                     )
                 ]
             ]
@@ -123,5 +123,9 @@ async def help(client: Client, message: Message):
 @Client.on_callback_query()
 async def callback(bot, msg: CallbackQuery):
     if msg.data == "close1":
+        await msg.answer("Closed")
+        await msg.message.delete()
+    
+    elif msg.data == "close":
         await msg.answer("Closed")
         await msg.message.delete()
