@@ -30,7 +30,7 @@ EMOJIS = [
 @Client.on_message(filters.new_chat_members)
 async def start_(client: Client, message: Message):
        await message.reply_text(
-        f"""<b>Hi {message.from_user.first_name}!
+        f"""<b>Hi {message.from_user.first_namel}!
 \nWelcome To {message.chat.title}
  </b>""",
       
@@ -66,7 +66,7 @@ async def start_(client: Client, message: Message):
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client: Client, message: Message):
     await message.reply_text(
-        "💁🏻‍♂️ assalamualaikum ",reply_markup=InlineKeyboardMarkup(
+        "💁🏻‍♂️ assalamualaikum hyyy p{message.from_user.first_name}",reply_markup=InlineKeyboardMarkup(
                [
                 [
                     InlineKeyboardButton(
@@ -118,3 +118,9 @@ async def help(client: Client, message: Message):
             ]
         )
     )    
+
+@Client.on_callback_query()
+async def callback(bot, msg: CallbackQuery):
+    if msg.data == "close":
+        await msg.answer("Closed")
+        await msg.message.delete()
