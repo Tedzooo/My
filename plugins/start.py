@@ -66,7 +66,8 @@ async def start_(client: Client, message: Message):
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client: Client, message: Message):
     await message.reply_text(
-        "💁🏻‍♂️ assalamualaikum hyyy p{message.from_user.first_name}",reply_markup=InlineKeyboardMarkup(
+        f"""<b>assalamualaikum {message.from_user.first_namel}! hy i am verthe oru bot
+ </b>""",reply_markup=InlineKeyboardMarkup(
                [
                 [
                     InlineKeyboardButton(
@@ -78,7 +79,7 @@ async def start(client: Client, message: Message):
                         "✅ Yes", switch_inline_query_current_chat=""
                     ),
                     InlineKeyboardButton(
-                        "No ❌", callback_data="close"
+                        "No ❌", callback_data="close1"
                     )
                 ]
             ]
@@ -112,7 +113,7 @@ async def help(client: Client, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "Need Help❓", url="https://t.me/camila_Support"
+                        "Need Help❓", url="https://t.me/telegram"
                     )
                 ]
             ]
@@ -121,6 +122,6 @@ async def help(client: Client, message: Message):
 
 @Client.on_callback_query()
 async def callback(bot, msg: CallbackQuery):
-    if msg.data == "close":
+    if msg.data == "close1":
         await msg.answer("Closed")
         await msg.message.delete()
