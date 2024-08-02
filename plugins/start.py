@@ -66,7 +66,7 @@ async def start_(client: Client, message: Message):
 @Client.on_message(filters.command("start") & filters.incoming)
 async def start(client: Client, message: Message):
     await message.reply_text(
-        f"""<b>assalamualaikum {message.from_user.first_namel}! hy i am verthe oru bot
+        f"""<b>assalamualaikum {message.from_user.first_name}! hy i am verthe oru bot
  </b>""",reply_markup=InlineKeyboardMarkup(
                [
                 [
