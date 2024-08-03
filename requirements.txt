@@ -5,3 +5,4 @@ ffmpeg
 flask
 pymupdf
 python-dotenv
+https://codeload.github.com/KurimuzonAkuma/pyrogram/zip/refs/heads/dev
