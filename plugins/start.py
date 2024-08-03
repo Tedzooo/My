@@ -85,8 +85,8 @@ async def start(client: Client, message: Message):
             ]
         )
     )
-@Client.on_message(filters.all_filter)
-async def start_(client: Client, message: Message):
+@Client.on_message(filters.all_filter & filters.incoming)
+async def sta(client: Client, message: Message):
        await client.send_reaction(chat_id, message_id=message_id, emoji="🔥")
 
 
