@@ -2,29 +2,6 @@ import random
 import asyncio
 from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
-from pyrogram.errors import MessageIdInvalid, ChatAdminRequired, EmoticonInvalid, ReactionInvalid, FloodWait
-
-EMOJIS = [
-        "👍", "👎", "❤", "🔥", 
-        "🥰", "👏", "😁", "🤔",
-        "🤯", "😱", "🤬", "😢",
-        "🎉", "🤩", "🤮", "💩",
-        "🙏", "👌", "🕊", "🤡",
-        "🥱", "🥴", "😍", "🐳",
-        "❤‍🔥", "🌚", "🌭", "💯",
-        "🤣", "⚡", "🍌", "🏆",
-        "💔", "🤨", "😐", "🍓",
-        "🍾", "💋", "🖕", "😈",
-        "😴", "😭", "🤓", "👻",
-        "👨‍💻", "👀", "🎃", "🙈",
-        "😇", "😨", "🤝", "✍",
-        "🤗", "🫡", "🎅", "🎄",
-        "☃", "💅", "🤪", "🗿",
-        "🆒", "💘", "🙉", "🦄",
-        "😘", "💊", "🙊", "😎",
-        "👾", "🤷‍♂", "🤷", "🤷‍♀",
-        "😡"
-]
 
 
 @Client.on_message(filters.new_chat_members)
@@ -67,7 +44,8 @@ async def start_(client: Client, message: Message):
 async def start(client: Client, message: Message):
     await message.reply_text(
         f"""<b>assalamualaikum {message.from_user.first_name}! hy i am verthe oru bot
- </b>""",reply_markup=InlineKeyboardMarkup(
+ </b>""",
+            reply_markup=InlineKeyboardMarkup(
                [
                 [
                     InlineKeyboardButton(
