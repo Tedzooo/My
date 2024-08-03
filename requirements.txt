@@ -1,5 +1,7 @@
 pyrofork
 tgcrypto
+tqdm
+ffmpeg
 flask
 pymupdf
 python-dotenv
