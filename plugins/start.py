@@ -15,7 +15,8 @@ HELP_TEXT = """--**Help**--
 - Then I will download it
 - I will then upload it to the telegra.ph link
 """
-
+ 
+DOWNLOAD_LOCATION = ("DOWNLOAD_LOCATION", "./DOWNLOADS/")
 ABOUT_TEXT = """--**About Me**--
 
 - **Bot :** `Telegraph Uploader`
@@ -94,8 +95,7 @@ async def start_(client: Client, message: Message):
             ]
         )
     )
- 
-DOWNLOAD_LOCATION = os.environ.get("DOWNLOAD_LOCATION", "./DOWNLOADS/")
+
 
 @Client.on_callback_query()
 async def cb_data(bot, update):
