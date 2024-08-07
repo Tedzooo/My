@@ -4,6 +4,62 @@ from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 
 
+START_TEXT = """Hello {},
+I am an under 5MB media or file to telegra.ph link uploader bot.
+
+Made by @FayasNoushad"""
+
+HELP_TEXT = """--**Help**--
+
+- Just give me a media under 5MB
+- Then I will download it
+- I will then upload it to the telegra.ph link
+"""
+
+ABOUT_TEXT = """--**About Me**--
+
+- **Bot :** `Telegraph Uploader`
+- **Developer :**
+  • [GitHub](https://github.com/FayasNoushad)
+  • [Telegram](https://telegram.me/FayasNoushad)
+- **Source :** [Click here](https://github.com/FayasNoushad/Telegraph-Uploader-Bot)
+- **Language :** [Python3](https://python.org)
+- **Library :** [Pyrogram](https://pyrogram.org)"""
+
+START_BUTTONS = InlineKeyboardMarkup(
+    [
+        [
+            InlineKeyboardButton('Feedback', url='https://telegram.me/FayasNoushad')
+        ],
+        [
+            InlineKeyboardButton('Help', callback_data='help'),
+            InlineKeyboardButton('About', callback_data='about'),
+            InlineKeyboardButton('Close', callback_data='close')
+        ]
+    ]
+)
+
+HELP_BUTTONS = InlineKeyboardMarkup(
+    [
+        [
+            InlineKeyboardButton('Home', callback_data='home'),
+            InlineKeyboardButton('About', callback_data='about'),
+            InlineKeyboardButton('Close', callback_data='close')
+        ]
+    ]
+)
+
+ABOUT_BUTTONS = InlineKeyboardMarkup(
+    [
+        [
+            InlineKeyboardButton('Home', callback_data='home'),
+            InlineKeyboardButton('Help', callback_data='help'),
+            InlineKeyboardButton('Close', callback_data='close')
+        ]
+    ]
+)
+
+
 @Client.on_message(filters.new_chat_members)
 async def start_(client: Client, message: Message):
        await message.reply_text(
@@ -39,70 +95,47 @@ async def start_(client: Client, message: Message):
         )
     )
  
-
-@Client.on_message(filters.command("start") & filters.incoming)
-async def start(client: Client, message: Message):
-    await message.reply_text(
-        f"""<b>assalamualaikum {message.from_user.first_name}! hy i am verthe oru bot
- </b>""",
-            reply_markup=InlineKeyboardMarkup(
-               [
-                [
-                    InlineKeyboardButton(
-                        "Support Group  ", url="https://t.me/tedzo01"
-                    )
-                ],    
-                [    
-                    InlineKeyboardButton(
-                        "✅ Yes", switch_inline_query_current_chat=""
-                    ),
-                    InlineKeyboardButton(
-                        "No ❌", callback_data="close"
-                    )
-                ]
-            ]
-        )
-
-@Client.on_message(filters.command("help") & filters.incoming)
-async def help(client: Client, message: Message):
-    await message.reply_text(
-        f"""<b>Hi {message.from_user.first_name}!
-\n/start <song name> - play song you requested
-/id <song name> - play song you requested via deezer
-/calculator <song name> - play song you requested via jio saavn
-/webs - Show now playing list
-/wallpaper- Show now playing
-/song <song name> - download songs you want quickly
-/search <query> - search videos on youtube with details
-/deezer <song name> - download songs you want quickly via deezer
-/saavn <song name> - download songs you want quickly via saavn
-/video <song name> - download videos you want quickly
-\n*Admins only*
-/player - open music player settings panel
-/pause - pause song play
-/resume - resume song play
-/skip - play next song
-/end - stop music play
-/userbotjoin - invite assistant to your chat
-/admincache - Refresh admin list
- </b>""",
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(
-                        "Need Help❓", url="https://t.me/telegram"
-                    )
-                ]
-            ]
-        )
-    )    
+DOWNLOAD_LOCATION = os.environ.get("DOWNLOAD_LOCATION", "./DOWNLOADS/")
 
 @Client.on_callback_query()
-async def callback(bot, msg: CallbackQuery):
-    if msg.data == "close1":
-        await msg.answer("Closed")
-        await msg.message.delete()
+async def cb_data(bot, update):
     
+    if update.data == "home":
+        await update.message.edit_text(
+            text=START_TEXT.format(update.from_user.mention),
+            disable_web_page_preview=True,
+            reply_markup=START_BUTTONS
+        )
     elif msg.data == "close":
         await msg.answer("Closed")
         await msg.message.delete()
+
+    elif update.data == "help":
+        await update.message.edit_text(
+            text=HELP_TEXT,
+            disable_web_page_preview=True,
+            reply_markup=HELP_BUTTONS
+        )
+    
+    elif update.data == "about":
+        await update.message.edit_text(
+            text=ABOUT_TEXT,
+            disable_web_page_preview=True,
+            reply_markup=ABOUT_BUTTONS
+        )
+    
+    else:
+        await update.message.delete()
+    
+
+@Client.on_message(filters.private & filters.command(["start"]))
+async def start(bot, update):
+    
+    await update.reply_text(
+        text=START_TEXT.format(update.from_user.mention),
+        disable_web_page_preview=True,
+        quote=True,
+        reply_markup=START_BUTTONS
+    )
+
+
