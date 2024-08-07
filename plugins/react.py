@@ -2,6 +2,8 @@ from pyrogram import Client, filters
 from pyrogram.types import Message
 from pyrogram.errors import MessageIdInvalid, ChatAdminRequired, EmoticonInvalid, ReactionInvalid 
 import random 
+import asyncio
+from pyrogram.errors import FloodWait
 
 EMOJIS = [
         "👍", "👎", "❤", "🔥", 
@@ -41,4 +43,10 @@ async def _help(_, msg):
         ReactionInvalid
     ):
     pass
-	await msg.reply_sticker(STICKER)
+	m= await msg.reply_sticker(STICKER)
+
+    try:
+        ...  # Your code
+    except FloodWait as e:
+        await asyncio.sleep(e.value)  # Wait "value" seconds before continuing
+        await msg.delete
