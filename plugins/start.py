@@ -1,7 +1,31 @@
-import random
+#hyyy
 import asyncio
 from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
+from pyrogram.errors import MessageIdInvalid, ChatAdminRequired, EmoticonInvalid, ReactionInvalid 
+from random import choice
+
+EMOJIS = [
+        "👍", "👎", "❤", "🔥", 
+        "🥰", "👏", "😁", "🤔",
+        "🤯", "😱", "🤬", "😢",
+        "🎉", "🤩", "🤮", "💩",
+        "🙏", "👌", "🕊", "🤡",
+        "🥱", "🥴", "😍", "🐳",
+        "❤‍🔥", "🌚", "🌭", "💯",
+        "🤣", "⚡", "🍌", "🏆",
+        "💔", "🤨", "😐", "🍓",
+        "🍾", "💋", "🖕", "😈",
+        "😴", "😭", "🤓", "👻",
+        "👨‍💻", "👀", "🎃", "🙈",
+        "😇", "😨", "🤝", "✍",
+        "🤗", "🫡", "🎅", "🎄",
+        "☃", "💅", "🤪", "🗿",
+        "🆒", "💘", "🙉", "🦄",
+        "😘", "💊", "🙊", "😎",
+        "👾", "🤷‍♂", "🤷", "🤷‍♀",
+        "😡"
+]
 
 
 START_TEXT = """Hello {},
@@ -63,6 +87,15 @@ ABOUT_BUTTONS = InlineKeyboardMarkup(
 
 @Client.on_message(filters.new_chat_members)
 async def start_(client: Client, message: Message):
+ try:
+        await msg.react(choice(EMOJIS))
+    except (
+        MessageIdInvalid,
+        EmoticonInvalid,
+        ChatAdminRequired,
+        ReactionInvalid
+    ):
+        pass
        await message.reply_text(
         f"""<b>Hi {message.from_user.first_namel}!
 \nWelcome To {message.chat.title}
