@@ -30,8 +30,8 @@ STICKER = random.choice(STICKERS)
 # Help Message
 
 
-@Client.on_message(filters.bot)
-async def send_reaction(_, msg: Message):
+@Client.on_message(filters.command(["help"]))
+async def _help(_, msg):
     try:
         await msg.react(choice(EMOJIS))
     except (
