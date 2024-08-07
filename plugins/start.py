@@ -87,15 +87,6 @@ ABOUT_BUTTONS = InlineKeyboardMarkup(
 
 @Client.on_message(filters.new_chat_members)
 async def start_(client: Client, message: Message):
- try:
-        await msg.react(choice(EMOJIS))
-    except (
-        MessageIdInvalid,
-        EmoticonInvalid,
-        ChatAdminRequired,
-        ReactionInvalid
-    ):
-        pass
        await message.reply_text(
         f"""<b>Hi {message.from_user.first_namel}!
 \nWelcome To {message.chat.title}
@@ -163,7 +154,15 @@ async def cb_data(bot, update):
 
 @Client.on_message(filters.private & filters.command(["start"]))
 async def start(bot, update):
-    
+    try:
+        await msg.react(choice(EMOJIS))
+    except (
+        MessageIdInvalid,
+        EmoticonInvalid,
+        ChatAdminRequired,
+        ReactionInvalid
+    ):
+        pass
     await update.reply_text(
         text=START_TEXT.format(update.from_user.mention),
         disable_web_page_preview=True,
