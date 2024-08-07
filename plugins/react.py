@@ -1,7 +1,7 @@
 from pyrogram import Client, filters
 from pyrogram.types import Message
 from pyrogram.errors import MessageIdInvalid, ChatAdminRequired, EmoticonInvalid, ReactionInvalid 
-from random import choice
+import random 
 
 EMOJIS = [
         "👍", "👎", "❤", "🔥", 
@@ -24,6 +24,10 @@ EMOJIS = [
         "👾", "🤷‍♂", "🤷", "🤷‍♀",
         "😡"
 ]
+STICKERS = ["CAACAgUAAxkBAAEGPnNgPcbx75_XWKMwgMtZIJlvpUa9gAACsQIAAkzoiVdQPozmP6_Gjx4E", "CAACAgUAAxkBAAEGPnVgPccf4H7Yj7GAoVY9NuoNH9CslAACEQIAApuT8FXBRjVF95zJJR4E"]
+STICKER = random.choice(STICKERS)
+
+# Help Message
 
 
 @Client.on_message(filters.bot)
@@ -36,4 +40,5 @@ async def send_reaction(_, msg: Message):
         ChatAdminRequired,
         ReactionInvalid
     ):
-        pass
+    pass
+	await msg.reply_sticker(STICKER)
