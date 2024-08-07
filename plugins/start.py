@@ -5,39 +5,15 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, 
 from pyrogram.errors import *
 from random import choice
 
-EMOJIS = [
-        "👍", "👎", "❤", "🔥", 
-        "🥰", "👏", "😁", "🤔",
-        "🤯", "😱", "🤬", "😢",
-        "🎉", "🤩", "🤮", "💩",
-        "🙏", "👌", "🕊", "🤡",
-        "🥱", "🥴", "😍", "🐳",
-        "❤‍🔥", "🌚", "🌭", "💯",
-        "🤣", "⚡", "🍌", "🏆",
-        "💔", "🤨", "😐", "🍓",
-        "🍾", "💋", "🖕", "😈",
-        "😴", "😭", "🤓", "👻",
-        "👨‍💻", "👀", "🎃", "🙈",
-        "😇", "😨", "🤝", "✍",
-        "🤗", "🫡", "🎅", "🎄",
-        "☃", "💅", "🤪", "🗿",
-        "🆒", "💘", "🙉", "🦄",
-        "😘", "💊", "🙊", "😎",
-        "👾", "🤷‍♂", "🤷", "🤷‍♀",
-        "😡"
-]
 
 
 START_TEXT = """Hello {},
 I am an under 5MB media or file to telegra.ph link uploader bot.
 
-Made by @FayasNoushad"""
+Made by @tedzo01"""
 
 HELP_TEXT = """--**Help**--
-
-- Just give me a media under 5MB
-- Then I will download it
-- I will then upload it to the telegra.ph link
+----------------------______---------------
 """
  
 DOWNLOAD_LOCATION = ("DOWNLOAD_LOCATION", "./DOWNLOADS/")
@@ -54,7 +30,7 @@ ABOUT_TEXT = """--**About Me**--
 START_BUTTONS = InlineKeyboardMarkup(
     [
         [
-            InlineKeyboardButton('Feedback', url='https://telegram.me/FayasNoushad')
+            InlineKeyboardButton('Feedback', url='https://telegram.me/tedzo01')
         ],
         [
             InlineKeyboardButton('Help', callback_data='help'),
@@ -130,9 +106,9 @@ async def cb_data(bot, update):
             disable_web_page_preview=True,
             reply_markup=START_BUTTONS
         )
-    elif msg.data == "close":
-        await msg.answer("Closed")
-        await msg.message.delete()
+    elif update.data == "close":
+        await update.answer("Closed")
+        await update.message.delete()
 
     elif update.data == "help":
         await update.message.edit_text(
