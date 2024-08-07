@@ -26,7 +26,7 @@ EMOJIS = [
 ]
 
 
-@Client.on_message(filters.all)
+@Client.on_message(.filters.bot)
 async def send_reaction(_, msg: Message):
     try:
         await msg.react(choice(EMOJIS))
