@@ -48,5 +48,6 @@ async def _help(_, msg):
     try:
         ...  # Your code
     except FloodWait as e:
-        await asyncio.sleep(e.value)  # Wait "value" seconds before continuing
-        await msg.delete
+        await asyncio.sleep(e.value)  
+	  await msg.react(choice(EMOJIS))  # Wait "value" seconds before continuing
+        return await m.delete()
