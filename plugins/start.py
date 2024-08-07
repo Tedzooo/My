@@ -2,7 +2,7 @@
 import asyncio
 from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
-from pyrogram.errors import MessageIdInvalid, ChatAdminRequired, EmoticonInvalid, ReactionInvalid 
+from pyrogram.errors import MessageIdInvalid, ChatAdminRequired, EmoticonInvalid, ReactionInvalid, FloodWait
 from random import choice
 
 EMOJIS = [
@@ -155,6 +155,8 @@ async def cb_data(bot, update):
 @Client.on_message(filters.private & filters.command(["start"]))
 async def start(bot, update):
     try:
+        except FloodWait as e:
+        await asyncio.sleep(e.value)
         await msg.react(choice(EMOJIS))
     except (
         MessageIdInvalid,
