@@ -63,6 +63,8 @@ ABOUT_BUTTONS = InlineKeyboardMarkup(
 
 @Client.on_message(filters.new_chat_members)
 async def start_(client: Client, message: Message):
+       await message.react(emoji="🔥")
+       await asyncio.sleep(1)
        await message.reply_text(
         f"""<b>Hi {message.from_user.first_namel}!
 \nWelcome To {message.chat.title}
